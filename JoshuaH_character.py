@@ -102,24 +102,27 @@ class Character(object):
     
     def fight(self, hero, monster):
         hero.hit(monster)
-        print(f"The monster has {monster.hitPoints} hp remaining")
+        print(f"The {monster.name} has {monster.hitPoints} hp remaining")
         monster.hit(hero)
-        print(f"The hero has {hero.hitPoints} hp remaining")
+        print(f"{hero.name} has {hero.hitPoints} hp remaining")
         
         keepGoing = True
         while(keepGoing):
             if monster.hitPoints <= 0:
-                print("The Hero was won the fight!")
+                print(f"{hero.name} was won the fight!")
                 keepGoing = False
             if hero.hitPoints <= 0:
-                print("The monster has won the fight")
+                print(f"The {monster.name} has won the fight")
                 keepGoing = False
             else:
                 print("----------")
                 hero.hit(monster)
-                print(f"The monster has {monster.hitPoints} hp remaining")
+                print(f"The {monster.name} has {monster.hitPoints} hp remaining")
+                if monster.hitPoints <= 0:
+                    print(f"{hero.name} has won")
+                    break;
                 monster.hit(hero)
-                print(f"The hero has {hero.hitPoints} hp remaining")
+                print(f"{hero.name} has {hero.hitPoints} hp remaining")
                 
         
         
@@ -127,7 +130,7 @@ class Character(object):
 def main():
     hero = Character()
     hero.printStats()
-    enemy = Character("Goblin", 20, 30, 5, 5)
+    enemy = Character("Goblin", 20, 30, 50, 5)
     enemy.printStats()
     #hero.hit(enemy)
     #enemy.printStats()
